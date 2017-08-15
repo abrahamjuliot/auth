@@ -1,0 +1,47 @@
+UPGRADE NODE
+- https://community.c9.io/t/how-to-update-node-js/1273
+- nvm install 6
+- nvm alias default 6
+
+MONGO/ MONGOOSE
+- https://github.com/treehouse-projects/javascript-authentication-with-express-and-mongo
+Setting Up Mongoose and a Mongo Database
+- https://community.c9.io/t/setting-up-mongodb/1717
+  - sudo apt-get install -y mongodb-org
+      $ mkdir data
+      $ echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --smallfiles --rest "$@"' > mongod
+      $ chmod a+x mongod
+  - in a new console tab run ./mongod (in the project root)
+  - this tab must remain running
+- Mongoose is an object data modeling library
+  - http://mongoosejs.com/docs/guide.html
+  - npm install --save mongoose
+  - mongoose = require('mongoose')
+  - 27017 is the default port for mong db
+  - mongoose.connect(`mongodb://${process.env.IP}:27017/bookworm`);
+  
+- to view the database, open another terminal tab (can be at workspace root):
+  - > mongo
+  - > use bookworm // selects the database
+  - > show collections // returns collection users (in this app)
+  - > db.users.find()
+  - > db.users.find().pretty()
+  - > db.users.drop() // to remove the colleciton
+  - > show dbs // show all databases
+  
+SECURITY
+  - npm install bcrypt --save
+ 
+SESSIONS
+  - npm install express-session --save
+  - npm install connect-mongo --save
+    - MongoStore = require('connect-mongo')(session)
+    - store: new MongoStore({
+        mongooseConnection: db
+      }) // add to seesion options
+    - db.sessions.find().pretty()// views active sessions in mongo shell
+RESOURCES
+  - http://passportjs.org/
+  - https://jwt.io/
+  - http://oauth.net/
+ 
